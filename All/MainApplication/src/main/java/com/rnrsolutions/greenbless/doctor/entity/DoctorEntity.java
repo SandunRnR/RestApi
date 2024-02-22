@@ -21,11 +21,17 @@ public class DoctorEntity {
 
     private String name;
     private String phoneNumber;
+    private String token;
+    private String chatText;
 
     public DoctorEntity(
             String pName,
-            String pPhoneNumber) {
+            String pPhoneNumber,
+            String pToken,
+            String pChatText) {
         this.name = pName;
         this.phoneNumber = pPhoneNumber;
+        this.token = pToken;
+        this.chatText = pChatText;
     }
 }

@@ -11,4 +11,6 @@ public class DoctorDTO {
 
     private String name;
     private String phoneNumber;
+    private String token;
+    private String chatText;
 }

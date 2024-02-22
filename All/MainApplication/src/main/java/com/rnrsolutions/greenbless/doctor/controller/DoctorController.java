@@ -9,7 +9,6 @@ import com.rnrsolutions.greenbless.doctor.entity.DoctorEntity;
 import com.rnrsolutions.greenbless.doctor.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @CrossOrigin
@@ -24,10 +23,9 @@ public class DoctorController {
     public String saveDoctorWithDTO(
             @RequestBody DoctorDTO pDoctorDTO) throws Exception {
         return doctorService.saveDoctor(pDoctorDTO.getName(),
-                pDoctorDTO.getPhoneNumber()
+                pDoctorDTO.getPhoneNumber(), pDoctorDTO.getToken(),pDoctorDTO.getChatText()
         );
     }
-
 
     @GetMapping("/getAll")
     public List<DoctorEntity> getAllDoctorEntities() {
@@ -44,5 +42,18 @@ public class DoctorController {
     public String getDoctorPhoneNumberById(@PathVariable int id) {
         DoctorEntity doctorEntity = doctorService.getDoctorById(id);
         return doctorEntity != null ? doctorEntity.getPhoneNumber() : "Doctor not found";
+    }
+
+
+    @GetMapping("/getToken/{id}")
+    public String getTokenBy(@PathVariable int id){
+        DoctorEntity doctorEntity = doctorService.getDoctorById(id);
+        return doctorEntity != null ? doctorEntity.getToken():"Token not Found";
+    }
+
+    @GetMapping("/getIpAddress/{id}")
+    public String getIPAddressById(@PathVariable int id){
+        DoctorEntity doctorEntity = doctorService.getDoctorById(id);
+        return doctorEntity != null ? doctorEntity.getToken() : "Ip not valid for Ip Address";
     }
 }

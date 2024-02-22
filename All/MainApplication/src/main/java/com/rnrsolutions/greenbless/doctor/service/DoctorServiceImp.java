@@ -17,9 +17,9 @@ public class DoctorServiceImp implements DoctorService{
     @Autowired
     private DoctorRepo doctorRepo;
 
-    public String saveDoctor(String pName, String pPhoneNumber) throws Exception{
+    public String saveDoctor(String pName, String pPhoneNumber,String pIp,String pChatText) throws Exception{
 
-        DoctorEntity newObjectDoctorObject = new DoctorEntity(pName,pPhoneNumber);
+        DoctorEntity newObjectDoctorObject = new DoctorEntity(pName,pPhoneNumber,pIp,pChatText);
 
         try {
             doctorRepo.save(newObjectDoctorObject);

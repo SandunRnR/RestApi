@@ -6,8 +6,9 @@ import com.rnrsolutions.greenbless.doctor.entity.DoctorEntity;
 import java.util.List;
 
 public interface DoctorService {
-    public String saveDoctor(String pName, String pPhoneNumber) throws Exception;
+    public String saveDoctor(String pName, String pPhoneNumber,String pIp,String pChatText) throws Exception;
     public List<DoctorEntity> getAllDoctorEntities();
+
 
     public DoctorEntity getDoctorById(int id);
 
