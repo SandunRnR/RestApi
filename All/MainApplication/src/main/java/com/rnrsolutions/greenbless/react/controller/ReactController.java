@@ -22,8 +22,8 @@ public class ReactController {
     @PostMapping("/saveDTO")
     public String saveDoctorWithDTO(
             @RequestBody ReactDTO pReactDTO) throws Exception {
-        return reactService.saveReact(pReactDTO.getQuantity(),
-                pReactDTO.getItem()
+        return reactService.saveReact(pReactDTO.getP_id(),pReactDTO.getProduct_version(),pReactDTO.getName(),
+                pReactDTO.getCategory(),pReactDTO.getModel(),pReactDTO.getBrand(),pReactDTO.getData_area(),pReactDTO.getProduct_rec_id()
         );
     }
 

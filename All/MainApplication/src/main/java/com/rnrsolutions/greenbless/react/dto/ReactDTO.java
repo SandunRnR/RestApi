@@ -12,7 +12,12 @@ public class ReactDTO {
 
     private int id;
 
-    private int quantity;
-    private String item;
-    private LocalDateTime uploadDateAndTime;
+    private String p_id;
+    private double product_version;
+    private String name;
+    private String category;
+    private String model;
+    private String brand;
+    private String data_area;
+    private String product_rec_id;
 }
