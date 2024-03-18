@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/ai")
@@ -41,6 +42,18 @@ public class FaceRecognitionController {
 //    public List<String> getFilteredData() {
 //        return faceRecognitionService.getFilteredData();
 //    }
+
+    @Autowired
+    public FaceRecognitionController(FaceRecognitionService faceRecognitionService) {
+        this.faceRecognitionService = faceRecognitionService;
+    }
+
+    @GetMapping("/first-anjali-profile")
+    public FaceRecognitionEntity getFirstAnjaliProfile() {
+        return faceRecognitionService.getFirstProfileWithAnjaliAndEmptyRecognizedNames();
+    }
+
+
 
 
 }

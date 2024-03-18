@@ -23,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,6 +70,19 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
     public List<FaceRecognitionEntity> getAllData() {
         return faceRecognitionRepository.findAll();
     }
+
+    @Autowired
+    public FaceRecognitionServiceImp(FaceRecognitionRepository faceRecognitionRepository) {
+        this.faceRecognitionRepository = faceRecognitionRepository;
+    }
+
+    @Override
+    public FaceRecognitionEntity getFirstProfileWithAnjaliAndEmptyRecognizedNames() {
+        return faceRecognitionRepository.findFirstByNextActionAndRecognizedNamesIsNull("Anjali");
+    }
+
+
+
 
 //    @Override
 //    public List<String> getFilteredData() {

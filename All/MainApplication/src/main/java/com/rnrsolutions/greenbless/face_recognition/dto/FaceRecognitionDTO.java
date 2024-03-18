@@ -19,7 +19,7 @@ public class FaceRecognitionDTO {
     private String recognized_names;
     private String next_action;
 
-    public FaceRecognitionDTO(int id, String fileName, String recognizedNames, String nextAction) {
+    public FaceRecognitionDTO( String fileName, String recognizedNames, String nextAction) {
         this.fileName = fileName;
         this.recognized_names=recognizedNames;
         this.next_action = nextAction;
