@@ -6,11 +6,15 @@ import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import com.rnrsolutions.greenbless.device_environment.entity.DeviceEnvironmentEntity1;
 import com.rnrsolutions.greenbless.face_recognition.dto.FaceRecognitionDTO;
 import com.rnrsolutions.greenbless.face_recognition.entity.FaceRecognitionEntity;
 import com.rnrsolutions.greenbless.face_recognition.repository.FaceRecognitionRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +39,7 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
     private String bucketName;
 
     @Override
-    public String uplaod(MultipartFile multipartFile) throws Exception {
+    public String uplaod(MultipartFile multipartFile,String nextAction) throws Exception {
         try {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             LocalDateTime currentDateTime = LocalDateTime.now();
@@ -44,7 +48,7 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
             String savedFileName = saveImageToFirebaseStorage(multipartFile);
 
             // Save other details to MySQL
-            FaceRecognitionEntity entityObject = new FaceRecognitionEntity(fileName,  (currentDateTime.toString() + "_" + fileName),currentDateTime);
+            FaceRecognitionEntity entityObject = new FaceRecognitionEntity(fileName,  (currentDateTime.toString() + "_" + fileName),currentDateTime,nextAction);
 
             faceRecognitionRepository.save(entityObject);
 
@@ -81,6 +85,40 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
         return faceRecognitionRepository.findFirstByNextActionAndRecognizedNamesIsNull("Anjali");
     }
 
+    @Override
+    public String updateFaceRecognition(int pId,  String pRecognizedNames, String pNextAction) throws Exception{
+        Optional<FaceRecognitionEntity> existingItem = faceRecognitionRepository.findById(pId);
+        if (existingItem.isPresent()) {
+            FaceRecognitionEntity updatedItem = existingItem.get();
+            updatedItem.setId(pId);
+            updatedItem.setRecognizedNames(pRecognizedNames);
+            updatedItem.setNextAction(pNextAction);
+            faceRecognitionRepository.save(updatedItem);
+            return "Successfully Updated!";
+        } else {
+            throw new Exception("ForecastItemEntity with ID " + pId + " not found");
+        }
+    }
+
+
+
+//    @Override
+//    public void updateRecognizedNamesByFileName(String file_name, String recognizedNames) {
+//        // Fetch the entity by fileName
+//        FaceRecognitionEntity entity = faceRecognitionRepository.findByFileName(file_name);
+//
+//        if (entity != null) {
+//            // Update recognizedNames field
+//            entity.setRecognizedNames(recognizedNames);
+//
+//            // Save the updated entity
+//            faceRecognitionRepository.save(entity);
+//        } else {
+//            // Handle the case when entity is not found for the given fileName
+//            // For example, you may throw an exception or log an error
+//            throw new EntityNotFoundException("Face recognition entity not found for file name: " + file_name);
+//        }
+//    }
 
 
 

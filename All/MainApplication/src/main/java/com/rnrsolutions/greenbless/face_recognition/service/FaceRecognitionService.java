@@ -7,11 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public interface FaceRecognitionService {
-    String uplaod(MultipartFile multipartFile) throws Exception;
+    String uplaod(MultipartFile multipartFile, String nextAction) throws Exception;
 
     String uploadImage(File file, String fileName) throws IOException;
 
@@ -23,5 +24,9 @@ public interface FaceRecognitionService {
 //    List<String> getFilteredData();
 
     FaceRecognitionEntity getFirstProfileWithAnjaliAndEmptyRecognizedNames();
+
+    String updateFaceRecognition(int id, String recognizedNames, String nextAction) throws Exception;
+
+//    void updateRecognizedNamesByFileName(String file_name, String recognizedNames);
 
 }

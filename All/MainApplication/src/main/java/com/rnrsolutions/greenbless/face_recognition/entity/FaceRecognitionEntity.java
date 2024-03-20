@@ -19,7 +19,7 @@ public class FaceRecognitionEntity {
     private int id;
 
     @Column(name = "file_name")
-    private String file_name;
+    private String fileName;
     private String savedFileName;
     private LocalDateTime uploadDateAndTime;
 
@@ -30,15 +30,16 @@ public class FaceRecognitionEntity {
 
 
 
-    public FaceRecognitionEntity(String pFileName,String pSavedFileName,LocalDateTime pUploadDateAndTime){
-        this.file_name = pFileName;
+    public FaceRecognitionEntity(String pFileName,String pSavedFileName,LocalDateTime pUploadDateAndTime,String nextAction){
+        this.fileName = pFileName;
         this.savedFileName = pSavedFileName;
         this.uploadDateAndTime = pUploadDateAndTime;
+        this.nextAction = nextAction;
     }
 
     public FaceRecognitionEntity(String fileName, String recognizedNames, String nextAction) {
 
-        this.file_name = fileName;
+        this.fileName = fileName;
         this.recognizedNames = recognizedNames;
         this.nextAction = nextAction;
     }
