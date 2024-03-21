@@ -52,7 +52,7 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
 
             faceRecognitionRepository.save(entityObject);
 
-            return "Successfully Inserted!";
+            return "Successfully Inserted! ";
         } catch (Exception e) {
             return ("Could not save File: " + e.getMessage());
         }
@@ -101,14 +101,18 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
     }
 
 
+    @Override
+    public String getRecognizedNamesForRukshan() {
+        FaceRecognitionEntity recordForRukshan = faceRecognitionRepository.findFirstByNextAction("Rukshan");
+        if (recordForRukshan != null) {
+            return recordForRukshan.getRecognizedNames();
+        } else {
+            return "Unknown User!";
+        }
+    }
 
 
-//    @Override
-//    public List<String> getFilteredData() {
-//        return faceRecognitionRepository.findByNextActionAndRecognizedNamesIsNullEmpty("Anjali")
-//                .stream()
-//                .collect(Collectors.toList());
-//    }
+
 
     public String saveImageToFirebaseStorage(MultipartFile multipartFile) throws Exception {
         try {

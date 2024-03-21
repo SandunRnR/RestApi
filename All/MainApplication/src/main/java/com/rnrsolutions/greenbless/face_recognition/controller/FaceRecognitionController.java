@@ -73,5 +73,10 @@ public class FaceRecognitionController {
                pFaceRecognitionDTO.getRecognized_names(),pFaceRecognitionDTO.getNext_action());
     }
 
+    @GetMapping("/recognized-names-for-rukshan")
+    public String getRecognizedNamesForRukshan() {
+        return faceRecognitionService.getRecognizedNamesForRukshan();
+    }
+
 
 }

@@ -17,6 +17,9 @@ public interface FaceRecognitionRepository extends JpaRepository<FaceRecognition
 
     FaceRecognitionEntity findByFileName(String file_name);
 
+    FaceRecognitionEntity findFirstByNextAction(String nextAction);
+
+
 //    @Query("SELECT f FROM FaceRecognitionEntity f WHERE (f.nextAction IS NULL OR f.nextAction = '') OR f.nextAction = :nextAction")
 //    FaceRecognitionEntity findFirstByNextActionAndRecognizedNamesIsNull(@Param("nextAction") String nextAction);
 

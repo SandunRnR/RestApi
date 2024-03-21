@@ -27,5 +27,7 @@ public interface FaceRecognitionService {
 
     String updateFaceRecognition(int id, String recognizedNames, String nextAction) throws Exception;
 
+    String getRecognizedNamesForRukshan();
+
 
 }
