@@ -102,25 +102,6 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
 
 
 
-//    @Override
-//    public void updateRecognizedNamesByFileName(String file_name, String recognizedNames) {
-//        // Fetch the entity by fileName
-//        FaceRecognitionEntity entity = faceRecognitionRepository.findByFileName(file_name);
-//
-//        if (entity != null) {
-//            // Update recognizedNames field
-//            entity.setRecognizedNames(recognizedNames);
-//
-//            // Save the updated entity
-//            faceRecognitionRepository.save(entity);
-//        } else {
-//            // Handle the case when entity is not found for the given fileName
-//            // For example, you may throw an exception or log an error
-//            throw new EntityNotFoundException("Face recognition entity not found for file name: " + file_name);
-//        }
-//    }
-
-
 
 //    @Override
 //    public List<String> getFilteredData() {

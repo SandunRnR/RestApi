@@ -27,13 +27,13 @@ public class FaceRecognitionController {
     @Autowired
     private FaceRecognitionService faceRecognitionService;
 
+
     @PostMapping("/upload_image")
     public Object uplaod(
             @RequestParam("file") MultipartFile multipartFile,
             @RequestParam("nextAction") String nextAction) throws Exception {
         return faceRecognitionService.uplaod(multipartFile,nextAction);
     }
-
 
 
     @PostMapping("/send_details")
@@ -43,26 +43,23 @@ public class FaceRecognitionController {
     }
 
 
-
     @GetMapping("/get_all_data")
     public List<FaceRecognitionEntity> getAllData() {
         return faceRecognitionService.getAllData();
     }
 
-//    @GetMapping("/get_filtered_data")
-//    public List<String> getFilteredData() {
-//        return faceRecognitionService.getFilteredData();
-//    }
 
     @Autowired
     public FaceRecognitionController(FaceRecognitionService faceRecognitionService) {
         this.faceRecognitionService = faceRecognitionService;
     }
 
+
     @GetMapping("/first-anjali-profile")
     public FaceRecognitionEntity getFirstAnjaliProfile() {
         return faceRecognitionService.getFirstProfileWithAnjaliAndEmptyRecognizedNames();
     }
+
 
     @PutMapping("/update-face-recognition-table")
     public String updateFaceRecognition(@RequestBody FaceRecognitionDTO pFaceRecognitionDTO) throws Exception{
@@ -75,26 +72,6 @@ public class FaceRecognitionController {
         return faceRecognitionService.updateFaceRecognition(pFaceRecognitionDTO.getId(),
                pFaceRecognitionDTO.getRecognized_names(),pFaceRecognitionDTO.getNext_action());
     }
-
-
-
-
-//    @PutMapping("/update-recognized-names")
-//    public ResponseEntity<String> updateRecognizedNamesByFileName(
-//            @RequestParam("fileName") String fileName,
-//            @RequestBody String recognizedNames) {
-//        try {
-//            faceRecognitionService.updateRecognizedNamesByFileName(fileName, recognizedNames);
-//            return ResponseEntity.ok("Recognized names updated successfully for file: " + fileName);
-//        } catch (EntityNotFoundException ex) {
-//            // Handle case when entity is not found
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Face recognition entity not found for file name: " + fileName);
-//        } catch (Exception ex) {
-//            // Handle other exceptions
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while updating recognized names for file: " + fileName);
-//        }
-//    }
-
 
 
 }

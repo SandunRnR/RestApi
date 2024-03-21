@@ -27,6 +27,5 @@ public interface FaceRecognitionService {
 
     String updateFaceRecognition(int id, String recognizedNames, String nextAction) throws Exception;
 
-//    void updateRecognizedNamesByFileName(String file_name, String recognizedNames);
 
 }
