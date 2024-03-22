@@ -73,10 +73,15 @@ public class FaceRecognitionController {
                pFaceRecognitionDTO.getRecognized_names(),pFaceRecognitionDTO.getNext_action());
     }
 
-    @GetMapping("/recognized-names-for-rukshan")
-    public String getRecognizedNamesForRukshan() {
-        return faceRecognitionService.getRecognizedNamesForRukshan();
-    }
+//    @GetMapping("/recognized-names-for-rukshan")
+//    public String getRecognizedNamesForRukshan() {
+//        return faceRecognitionService.getRecognizedNamesForRukshan();
+//    }
 
+    //For get the recognized name field according to id and next action field= "Rukshan"
+    @GetMapping("/recognized_names/{id}")
+    public String getRecognizedNamesById(@PathVariable("id") int id) {
+        return faceRecognitionService.getRecognizedNamesByIdAndNextAction(id, "Rukshan");
+    }
 
 }

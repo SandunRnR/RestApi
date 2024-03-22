@@ -50,9 +50,9 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
             // Save other details to MySQL
             FaceRecognitionEntity entityObject = new FaceRecognitionEntity(fileName,  (currentDateTime.toString() + "_" + fileName),currentDateTime,nextAction);
 
-            faceRecognitionRepository.save(entityObject);
+            FaceRecognitionEntity savedEntity =  faceRecognitionRepository.save(entityObject);
 
-            return "Successfully Inserted! ";
+            return "Successfully Inserted the photo with id number " +savedEntity.getId();
         } catch (Exception e) {
             return ("Could not save File: " + e.getMessage());
         }
@@ -101,16 +101,25 @@ public class FaceRecognitionServiceImp implements FaceRecognitionService{
     }
 
 
+//    @Override
+//    public String getRecognizedNamesForRukshan() {
+//        FaceRecognitionEntity recordForRukshan = faceRecognitionRepository.findFirstByNextAction("Rukshan");
+//        if (recordForRukshan != null) {
+//            return recordForRukshan.getRecognizedNames();
+//        } else {
+//            return "Unknown User!";
+//        }
+//    }
+
     @Override
-    public String getRecognizedNamesForRukshan() {
-        FaceRecognitionEntity recordForRukshan = faceRecognitionRepository.findFirstByNextAction("Rukshan");
-        if (recordForRukshan != null) {
-            return recordForRukshan.getRecognizedNames();
+    public String getRecognizedNamesByIdAndNextAction(int id, String nextAction) {
+        Optional<FaceRecognitionEntity> entityOptional = faceRecognitionRepository.findByIdAndNextAction(id, nextAction);
+        if (entityOptional.isPresent()) {
+            return entityOptional.get().getRecognizedNames();
         } else {
-            return "Unknown User!";
+            return "No data found for the provided ID and next action";
         }
     }
-
 
 
 
